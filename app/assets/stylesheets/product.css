@@ -1,0 +1,53 @@
+/* ... (ваш существующий CSS) ... */
+
+/* Стили для карточек товаров */
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.product-card {
+    flex: 0 0 calc(25% - 20px); /* Уменьшена ширина карточки товара (примерно 1/4 ширины родительского контейнера) */
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px; /* Уменьшен внутренний отступ */
+    margin-bottom: 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.product-card img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.product-card h3 {
+    font-size: 14px; /* Уменьшен размер шрифта */
+    margin-top: 5px; /* Уменьшен отступ */
+}
+
+.product-card p {
+    font-size: 12px; /* Уменьшен размер шрифта */
+    margin-top: 5px; /* Уменьшен отступ */
+}
+
+.product-card .price {
+    font-size: 14px; /* Уменьшен размер шрифта */
+    font-weight: bold;
+    color: #333;
+    margin-top: 5px; /* Уменьшен отступ */
+}
+
+.product-card .btn {
+    display: inline-block;
+    padding: 5px 10px; /* Уменьшен внутренний отступ */
+    font-size: 12px; /* Уменьшен размер шрифта */
+    background-color: #ff5733;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 5px; /* Уменьшен отступ */
+}

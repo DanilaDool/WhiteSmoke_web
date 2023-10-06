@@ -1,0 +1,77 @@
+/* Обнуляем отступы и поля */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Стили для шапки сайта */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+}
+
+nav ul {
+    list-style: none;
+    text-align: right; /* Выравниваем текст вправо */
+}
+
+nav ul li {
+    display: inline;
+    margin-left: 20px; /* Меняем margin-right на margin-left */
+}
+
+nav ul li:first-child {
+    margin-left: 0; /* Убираем margin-left у первого элемента */
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+/* Стили для промо-блока */
+.promo {
+    background-image: url('https://img.freepik.com/free-vector/circles-background-in-dark-tones_60389-166.jpg?w=1380&t=st=1696592942~exp=1696593542~hmac=516f0d325bad7c8a9d8661f7b1912009bdbe1fc6f76c6766a50a99986011f7f0');
+    background-size: cover;
+    text-align: center;
+    padding: 100px 0;
+    color: #fff;
+}
+
+.promo h1 {
+    font-size: 36px;
+}
+
+.promo p {
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ff5733;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+/* Стили для секции "Наши товары" */
+.products {
+    padding: 40px 0;
+}
+
+.products h2 {
+    font-size: 24px;
+}
+
+/* Стили для футера */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
