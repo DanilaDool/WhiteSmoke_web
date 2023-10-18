@@ -4,12 +4,8 @@
     padding: 0;
     box-sizing: border-box;
 }
-
-/* Стили для шапки сайта */
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
+body {
+    font-family: 'Roboto', sans-serif;
 }
 
 nav ul {
@@ -33,7 +29,7 @@ nav ul li a {
 
 /* Стили для промо-блока */
 .promo {
-    background-image: url('https://img.freepik.com/free-vector/circles-background-in-dark-tones_60389-166.jpg?w=1380&t=st=1696592942~exp=1696593542~hmac=516f0d325bad7c8a9d8661f7b1912009bdbe1fc6f76c6766a50a99986011f7f0');
+    background-image: url('https://phonoteka.org/uploads/posts/2021-04/1619121706_13-phonoteka_org-p-chyornii-fon-bez-nichego-dlya-telefona-13.jpg');
     background-size: cover;
     text-align: center;
     padding: 100px 0;
@@ -52,7 +48,7 @@ nav ul li a {
 .btn {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #ff5733;
+    background-color: #050505;
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
@@ -70,8 +66,49 @@ nav ul li a {
 
 /* Стили для футера */
 footer {
-    background-color: #333;
+    background-color: #050505;
     color: #fff;
     text-align: center;
     padding: 10px 0;
+}
+
+/* Стили для шапки сайта */
+header {
+    background-color: #fafcfa;
+    color: #fff;
+    padding: 20px 0; /* Увеличиваем вертикальный внутренний отступ */
+}
+
+nav ul {
+    list-style: none;
+    text-align: right; /* Выравниваем текст вправо */
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 10px; /* Уменьшаем правый отступ */
+}
+
+nav ul li:first-child {
+    margin-left: 20px; /* Добавляем margin-left у первого элемента */
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+/* Стили для кнопок Зарегистрироваться и Войти */
+.nav-button {
+    text-decoration: none;
+    background-color: #050505;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 20px; /* Увеличиваем горизонтальный внутренний отступ */
+    margin-right: 10px; /* Уменьшаем правый отступ между кнопками */
+}
+
+/* Уменьшаем правый отступ для кнопки Войти */
+.nav-button:last-child {
+    margin-right: 0;
 }

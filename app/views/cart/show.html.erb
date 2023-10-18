@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WhiteSmoke</title>
+  <style>
+      * {
+          box-sizing: border-box;
+      }
+
+      html,
+      body {
+          width: 100%;
+          height: 100%;
+          margin: 0;
+          background-color: #fafafa;
+          font-family: 'Roboto', sans-serif;
+      }
+
+      .shopping-cart {
+          width: 750px;
+          margin: 80px auto;
+          background: #FFFFFF;
+          box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.10);
+          border-radius: 6px;
+          display: flex;
+          flex-direction: column;
+      }
+
+      .title {
+          height: 60px;
+          border-bottom: 1px solid #E1E8EE;
+          padding: 20px 30px;
+          color: #5E6977;
+          font-size: 18px;
+          font-weight: 400;
+      }
+
+      .item {
+          padding: 20px 30px;
+          border-bottom: 1px solid #E1E8EE;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+      }
+
+      .buttons {
+          display: flex;
+          flex-direction: column;
+      }
+
+      .delete-btn,
+      .like-btn {
+          width: 20px;
+          height: 20px;
+          cursor: pointer;
+      }
+
+      .delete-btn {
+          background: url("delete-icn.svg") no-repeat center;
+      }
+
+      .like-btn {
+          background: url('twitter-heart.png') no-repeat center;
+          background-size: 100%;
+      }
+
+      .is-active {
+          animation-name: animate;
+          animation-duration: 0.8s;
+          animation-iteration-count: 1;
+          animation-timing-function: steps(28);
+          animation-fill-mode: forwards;
+      }
+
+      @keyframes animate {
+          0%   { background-size: 100%; }
+          50%  { background-size: 200%; }
+          100% { background-size: 100%; }
+      }
+
+      .image {
+          margin-right: 30px;
+      }
+
+      .image img {
+          max-width: 100px;
+          height: auto;
+      }
+
+      .description {
+          flex: 1;
+      }
+
+      .description span {
+          display: block;
+          font-size: 14px;
+          color: #43484D;
+          font-weight: 400;
+      }
+
+      .description span:first-child {
+          margin-bottom: 5px;
+      }
+
+      .description span:last-child {
+          font-weight: 300;
+          margin-top: 5px;
+          color: #86939E;
+      }
+
+      .quantity input {
+          border: none;
+          text-align: center;
+          width: 32px;
+          font-size: 16px;
+          color: #43484D;
+          font-weight: 300;
+      }
+
+      .quantity .plus-btn,
+      .quantity .minus-btn {
+          width: 20px;
+          height: 20px;
+          background-color: #E1E8EE;
+          border-radius: 6px;
+          cursor: pointer;
+      }
+
+      .total-price {
+          font-size: 16px;
+          color: #43484D;
+          font-weight: 300;
+      }
+
+      button:focus,
+      input:focus {
+          outline: 0;
+      }
+
+      @media (max-width: 800px) {
+          .shopping-cart {
+              width: 100%;
+          }
+
+          .item {
+              flex-direction: column;
+              align-items: flex-start;
+          }
+
+          .image {
+              margin-right: 0;
+              margin-bottom: 20px;
+          }
+
+          .buttons {
+              flex-direction: row;
+              margin-right: 0;
+          }
+      }
+      .order-btn {
+          width: 100px;
+          height: 40px;
+          background-color: #000a03;
+          color: white;
+          border: none;
+          border-radius: 6px;
+          font-size: 16px;
+          cursor: pointer;
+          margin: 20px 0;
+          align-self: flex-end;
+      }
+
+      /* Счетчик общего количества товаров */
+      .total-items {
+          font-size: 16px;
+          color: #43484D;
+          font-weight: 300;
+          margin: 20px 0;
+      }
+      .quantity .plus-btn,
+      .quantity .minus-btn {
+          width: 20px;
+          height: 20px;
+          background-color: #000000; /* Цвет фона кнопки */
+          border: none;
+          border-radius: 50%; /* Делает кнопку круглой */
+          color: white; /* Цвет текста */
+          font-size: 16px;
+          cursor: pointer;
+      }
+
+      .quantity .minus-btn {
+          margin-right: 10px; /* Добавляет отступ между кнопками */
+      }
+
+      /* Чтобы убрать стандартный стиль кнопок, такие как внешний контур при фокусе, используйте следующее: */
+      .quantity .plus-btn:focus,
+      .quantity .minus-btn:focus {
+          outline: none;
+      }
+
+      /* Стили для кнопки "-" при наведении и нажатии */
+      .quantity .minus-btn:hover,
+      .quantity .minus-btn:active {
+          background-color: white; /* Цвет фона при наведении и нажатии */
+          color: #000000; /* Цвет текста при наведении и нажатии */
+      }
+
+      /* Стили для кнопки "+" при наведении и нажатии */
+      .quantity .plus-btn:hover,
+      .quantity .plus-btn:active {
+          background-color: white; /* Цвет фона при наведении и нажатии */
+          color: #000000; /* Цвет текста при наведении и нажатии */
+      }
+
+      .back-icon {
+          position: fixed;
+          top: 10px;
+          right: 10px;
+          z-index: 999; /* Чтобы иконка была поверх других элементов */
+      }
+
+  </style>
+  <script>
+      // JavaScript для работы с счетчиком общего количества товаров
+      const itemCountElements = document.querySelectorAll('.quantity input');
+      const totalCountElement = document.getElementById('total-count');
+
+      itemCountElements.forEach(itemCountElement => {
+          itemCountElement.addEventListener('input', updateTotalCount);
+      });
+
+      function updateTotalCount() {
+          let totalCount = 0;
+
+          itemCountElements.forEach(itemCountElement => {
+              const count = parseInt(itemCountElement.value) || 0;
+              totalCount += count;
+          });
+
+          totalCountElement.textContent = totalCount;
+      }
+  </script>
+</head>
+<body>
+<header>
+  <div class="header-content">
+    <div class="header-logo">
+      <h1 class="header-title">
+        <a href="/" style="text-decoration: none; color: inherit;">WHITESMOKE</a>
+      </h1>
+    </div>
+  </div>
+</header>
+
+<div class="shopping-cart">
+  <!-- Счетчик общего количества товаров внизу слева -->
+  <div class="total-items" style="text-align: left; margin-left: 20px;">
+    Всего товаров: <span id="total-count">0</span>
+    <a href="/">
+      <img src="https://cdn-icons-png.flaticon.com/512/93/93634.png" alt="назад" width="35" height="35" style="float: right; margin-top: -5px; margin-right: 12px">
+    </a>
+  </div>
+
+  <!-- Товар #1 -->
+  <div class="item">
+    <div class="buttons">
+      <span class="delete-btn"></span>
+      <span class="like-btn"></span>
+    </div>
+
+    <div class="image">
+      <img src="https://dohuan.ru/wp-content/uploads/2021/06/vape-hub-1.jpg" alt="" />
+    </div>
+
+    <div class="description">
+      <span>Common Projects</span>
+      <span>Bball High</span>
+      <span>White</span>
+    </div>
+
+    <div class="quantity">
+      <button class="minus-btn" type="button">
+        -
+      </button>
+      <input type="text" value="1">
+      <button class="plus-btn" type="button">
+        +
+      </button>
+    </div>
+
+    <div class="total-price">$549</div>
+  </div>
+
+  <!-- Товар #2 -->
+  <div class="item">
+    <div class="buttons">
+      <span class="delete-btn"></span>
+      <span class="like-btn"></span>
+    </div>
+
+    <div class="image">
+      <img src="https://dohuan.ru/wp-content/uploads/2021/06/vape-hub-1.jpg" alt=""/>
+    </div>
+
+    <div class="description">
+      <span>Maison Margiela</span>
+      <span>Future Sneakers</span>
+      <span>White</span>
+    </div>
+
+    <div class="quantity">
+      <button class="minus-btn" type="button">
+        -
+      </button>
+      <input type="text" value="1">
+      <button class="plus-btn" type="button">
+        +
+      </button>
+    </div>
+
+    <div class="total-price">$870</div>
+  </div>
+
+  <!-- Товар #3 -->
+  <div class="item">
+    <div class="buttons">
+      <span class="delete-btn"></span>
+      <span class="like-btn"></span>
+    </div>
+
+    <div class="image">
+      <img src="https://dohuan.ru/wp-content/uploads/2021/06/vape-hub-1.jpg" alt="" />
+    </div>
+
+    <div class="description">
+      <span>Our Legacy</span>
+      <span>Brushed Scarf</span>
+      <span>Brown</span>
+    </div>
+
+    <div class="quantity">
+      <button class="minus-btn" type="button">
+        -
+      </button>
+      <input type="text" value="1">
+      <button class="plus-btn" type="button">
+        +
+      </button>
+    </div>
+
+    <div class="total-price">$349</div>
+  </div>
+
+  <div class="item">
+    <p style="text-align: left; margin: 0;">Итого: 3876$</p> <!-- Переместили этот абзац вверх -->
+    <div class="buttons">
+      <span class="delete-btn"></span>
+      <span class="like-btn"></span>
+    </div>
+    <div class="description" style="display: flex; align-items: center;">
+      <p style="text-align: left; margin: 0;">По вопросам связаться с нами можно:</p>
+
+      <a href="https://vk.com/levzamovgodlike" target="_blank">
+        <img src="https://w7.pngwing.com/pngs/795/929/png-transparent-vk-social-network-icon-thumbnail.png" alt="вк" width="35" height="35" style="margin-left: 10px; margin-right: 10px; margin-top: 5px;">
+      </a>
+
+      <a href="@drushniy" target="_blank">
+        <img src="https://w7.pngwing.com/pngs/402/10/png-transparent-telegram-logo-scalable-graphics-icon-logo-blue-angle-triangle.png" alt="тг" width="35" height="35" style="margin-top: 5px;">
+      </a>
+    </div>
+    <!-- Кнопка "Заказать" внизу справа -->
+    <button class="order-btn">Заказать</button>
+  </div>
+
+
+
+</div>
+
+</body>
+</html>

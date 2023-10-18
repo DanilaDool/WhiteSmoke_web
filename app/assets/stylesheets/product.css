@@ -4,18 +4,22 @@
 .products {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start; /* Изменил значение на "flex-start" для выравнивания товаров слева */
 }
 
 .product-card {
-    flex: 0 0 calc(25% - 20px); /* Уменьшена ширина карточки товара (примерно 1/4 ширины родительского контейнера) */
+    flex: 0 0 calc(20% - 10px); /* Уменьшена ширина карточки товара и отступы (примерно 1/5 ширины родительского контейнера) */
     background-color: #f5f5f5;
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 10px; /* Уменьшен внутренний отступ */
-    margin-bottom: 20px;
     text-align: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-right: 10px; /* Добавлен правый отступ между карточками */
+}
+
+.product-card:last-child {
+    margin-right: 0; /* Убираем правый отступ для последней карточки в ряду */
 }
 
 .product-card img {
@@ -25,29 +29,37 @@
 }
 
 .product-card h3 {
-    font-size: 14px; /* Уменьшен размер шрифта */
-    margin-top: 5px; /* Уменьшен отступ */
+    font-size: 14px; /* Увеличил размер шрифта для лучшей читаемости */
+    margin-top: 10px;
 }
 
 .product-card p {
-    font-size: 12px; /* Уменьшен размер шрифта */
-    margin-top: 5px; /* Уменьшен отступ */
+    font-size: 12px; /* Увеличил размер шрифта для лучшей читаемости */
+    margin-top: 10px;
 }
 
 .product-card .price {
-    font-size: 14px; /* Уменьшен размер шрифта */
+    font-size: 14px; /* Увеличил размер шрифта для лучшей читаемости */
     font-weight: bold;
     color: #333;
-    margin-top: 5px; /* Уменьшен отступ */
+    margin-top: 10px;
 }
 
 .product-card .btn {
     display: inline-block;
-    padding: 5px 10px; /* Уменьшен внутренний отступ */
-    font-size: 12px; /* Уменьшен размер шрифта */
-    background-color: #ff5733;
+    padding: 10px 20px;
+    font-size: 12px;
+    background-color: #050505;
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
-    margin-top: 5px; /* Уменьшен отступ */
+    margin-top: 10px;
+    transition: background-color 0.3s; /* Добавляем плавное изменение цвета */
 }
+
+.product-card .btn:active,
+.product-card .btn:hover {
+    background-color: white; /* Цвет фона при нажатии */
+    color: #050505; /* Цвет текста при нажатии */
+}
+

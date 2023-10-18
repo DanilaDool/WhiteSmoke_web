@@ -1,0 +1,50 @@
+/* styles.css */
+.header {
+    background: white;
+    overflow: hidden;
+    padding: 10px 0;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+}
+
+.header-logo {
+    flex: 1;
+}
+
+.header-title {
+    font-size: 24px;
+    color: #050505;
+    margin: 0;
+}
+
+.header-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.header-nav li {
+    display: inline;
+    margin-right: 15px;
+}
+
+.header-nav img {
+    vertical-align: middle;
+    margin-right: 30px;
+}
+
+.user-icon {
+    margin-right: 15px; /* Отступ между иконкой пользователя и корзиной */
+}
+
+.cart-icon {
+    margin-right: 0; /* Устанавливаем отступ между иконкой корзины и другими элементами в 0 */
+}
+
+
+/* Add any additional styles as needed */
